@@ -9,11 +9,11 @@ void checkGameOver() {
     conditionsCounter++;
   }
 
-  if (isLetterStackEmpty(letterStackLeft)) {
+  if (isLetterStackEmpty(letterStack1)) {
     conditionsCounter++;
   }
 
-  if (isLetterStackEmpty(letterStackRight)) {
+  if (isLetterStackEmpty(letterStack2)) {
     conditionsCounter++;
   }
 
@@ -36,19 +36,19 @@ void showLetterStacks() {
 
   // letters letterStack left 
   for (int i=0; i<8; i++) {
-    letterStackLeft[i].display();
+    letterStack1[i].display();
   }
 
   // letters letterStack right 
   for (int i=0; i<8; i++) {
-    letterStackRight[i].display();
+    letterStack2[i].display();
   }
 
   // Lines letterStack
-  showLinesAroundLetterStack( letterStackLeft, 0 ); // 0 says: letterStack Left 
+  showLinesAroundLetterStack( letterStack1, 0 ); // 0 says: letterStack Left 
 
   // Lines letterStack
-  showLinesAroundLetterStack( letterStackRight, 1 ); // 1 means: letterStack Right
+  showLinesAroundLetterStack( letterStack2, 1 ); // 1 means: letterStack Right
 }
 
 void showMinorStuff() {
@@ -59,8 +59,8 @@ void showMinorStuff() {
 
   // display points players 
   fill(255);
-  text(pointsLeft, 30, height-120); 
-  text(pointsRight, width - 30, height-120);
+  text("Player 1: " + pointsLeft, 1150, height-160); 
+  text("Player 2: " + pointsRight, 1150, height-120);
 
   // display score tables 
   for (int i = 0; i<scoreTables.length; i++) {  
@@ -75,7 +75,7 @@ void showLinesAroundLetterStack( Cell[] c, int leftLine   ) {
   if ( whichPlayersMove == leftLine ) 
     stroke (GREEN); 
   else 
-  stroke(GRAY); 
+  stroke(BLACK); 
 
   strokeWeight(3); 
   line(
@@ -100,18 +100,18 @@ void draggingALetter() {
 
   if (hold) {
     if ( whichPlayersMove == 0 ) {
-      letterStackLeft[holding].x=mouseX;
-      letterStackLeft[holding].y=mouseY;
+      letterStack1[holding].x=mouseX;
+      letterStack1[holding].y=mouseY;
     } else if ( whichPlayersMove == 1 ) {
-      letterStackRight[holding].x=mouseX;
-      letterStackRight[holding].y=mouseY;
+      letterStack2[holding].x=mouseX;
+      letterStack2[holding].y=mouseY;
     }
 
     if ( whichPlayersMove == 0 ) {
-      placeLetterOnMainGridTest(letterStackLeft);
+      placeLetterOnMainGridTest(letterStack1);
     }//if
     else if ( whichPlayersMove == 1 ) {
-      placeLetterOnMainGridTest(letterStackRight);
+      placeLetterOnMainGridTest(letterStack2);
     }//else
   }// if hold
 }
