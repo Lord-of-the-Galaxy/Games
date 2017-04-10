@@ -1,9 +1,17 @@
 //
 //  Scrabble
 //  Version 9th April 2017
+//
+//  By @Chrisir
+//
+//  Modifications and English by @Lord_of_the_Galaxy
+//
+
+// GERMAN or ENGLISH?
+public static final boolean G = false;
 
 // colors as consts
-final color GRAY = color(111); 
+final color BLACK = color(0); 
 final color GREEN = color(0, 255, 0); 
 final color RED = color(255, 0, 0);
 final color YELLOW = color(#FEFF15);
@@ -17,11 +25,11 @@ Cell[][] mainGrid  = new Cell[max1][max1]; // empty Array
 
 final int normalGame = 0; 
 final int gameOver = 1; 
-int state=normalGame; 
+int state = normalGame; 
 
 // these are the letters the 2 players hold on their hand / have before them 
-Cell[] letterStackLeft    = new Cell[8]; 
-Cell[] letterStackRight   = new Cell[8]; 
+Cell[] letterStack1    = new Cell[8]; 
+Cell[] letterStack2   = new Cell[8]; 
 
 // are we dragging a letter from letterStack? 
 boolean hold=false; // yes/no
@@ -50,8 +58,8 @@ int stateInputRight = DrawLetters;
 // player scores 
 int pointsLeft, pointsRight;
 
-// the score of the letters (how much is one letter worth)
-HashMap<String, Integer>  hashMapPointsOfLetter = new HashMap<String, Integer> ();  
+// the score of the letters (how much is one letter worth) German
+HashMap<String, Integer>  pointsOfLetter = new HashMap<String, Integer> ();  
 
 // for showing the table of results 
 String scoreTable=""; 
@@ -60,7 +68,7 @@ ScoreTable[] scoreTables = new ScoreTable[2];
 // ----------------------------------------------------------------
 
 void setup () {
-  size (920, 940);
+  size (1280, 720);
   textSize(22); 
 
   // generate Main Grid
@@ -72,29 +80,29 @@ void setup () {
 
   // letterStack of one player (left)
   for (int i=0; i<8; i++) {
-    letterStackLeft[i] = 
-      new Cell (40*i+20, height-80, color(#F0E2B3), false);
+    letterStack1[i] = 
+      new Cell (40*i + 680, 80, color(#F0E2B3), false);
   }
 
   // letterStack (right side)
   for (int i=0; i<8; i++) {
-    letterStackRight[i] = 
-      new Cell (40*i+580, height-80, color(#F0E2B3), false);
+    letterStack2[i] = 
+      new Cell (40*i+ 680, 280, color(#F0E2B3), false);
   }
 
   // Button init 
-  button0 = new Button ( "Draw Letters", 172, height-120, GREEN);  
-  button1 = new Button ( "Draw Letters", width-172, height-120, GRAY);
+  button0 = new Button ( "Draw Letters", 840, 160, GREEN);  
+  button1 = new Button ( "Draw Letters", 840, 360, BLACK);
 
   // ScoreTable init
-  scoreTables[0]=new ScoreTable(20, 250, 100, 320, 0); 
-  scoreTables[1]=new ScoreTable(width-120, 250, 100, 320, 1);
+  scoreTables[0]=new ScoreTable(720, 400, 100, 280, 0); 
+  scoreTables[1]=new ScoreTable(940, 400, 100, 280, 1);
 
   background (90);
 }
 
 void draw () {
-  background (90);
+  background (0);
 
   // buttons
   button0.display(); 
