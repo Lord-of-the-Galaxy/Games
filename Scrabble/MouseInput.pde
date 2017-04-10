@@ -3,6 +3,11 @@
 
 void mousePressed() {
 
+  if (state==startScreen) {
+    state=normalGame; 
+    return;
+  }//if
+
   // check 2 buttons 
   if ( button0.mouseOver() &&  whichPlayersMove == 0  ) {
     placeLetterOnMainGrid(letterStack1, whichPlayersMove);

@@ -5,7 +5,7 @@ void generateAllLetters() {
   // By addition we get a long string of ALL letters. This is our HEAP.   
   // From that String the players draw their 8 letters and later the other letters.
 
-  if (G) {
+  if (German) {
     allLetters =
       generateXLetters("A", 5)+
       generateXLetters("Ä", 1)+
@@ -70,7 +70,8 @@ void generateAllLetters() {
   //
   //  println(allLetters);
 
-  // for testing the end of game: 
+  // for testing the end of game:
+  // only two letters in total
   // allLetters = generateXLetters("A", 2);
 
   allLetters =  shuffleArray ( allLetters.toCharArray() );
@@ -81,7 +82,7 @@ void generateAllLetters() {
 void defineScoreForAllLetters() {
 
   // letters.
-  if (G) {
+  if (German) {
     defineValuePoints("A", 1);
     defineValuePoints("Ä", 6);
     defineValuePoints("B", 3);

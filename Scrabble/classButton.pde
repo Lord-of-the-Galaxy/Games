@@ -19,7 +19,7 @@ class Button {
   }
 
   void display() {
-    if(colorButton != BLACK){
+    if (colorButton != BLACK) {
       pushStyle();
       strokeWeight(2);
       stroke(255);

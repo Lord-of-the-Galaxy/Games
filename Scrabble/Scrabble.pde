@@ -1,6 +1,6 @@
 //
 //  Scrabble
-//  Version 9th April 2017
+//  Version 10th April 2017
 //
 //  By @Chrisir
 //
@@ -8,7 +8,7 @@
 //
 
 // GERMAN or ENGLISH?
-public static final boolean G = false;
+public static final boolean German = false;
 
 // colors as consts
 final color BLACK = color(0); 
@@ -23,12 +23,13 @@ final int max1=15;
 // main game board 
 Cell[][] mainGrid  = new Cell[max1][max1]; // empty Array
 
-final int normalGame = 0; 
-final int gameOver = 1; 
-int state = normalGame; 
+final int normalGame  = 0; 
+final int gameOver    = 1; 
+final int startScreen = 2; 
+int state = startScreen; 
 
 // these are the letters the 2 players hold on their hand / have before them 
-Cell[] letterStack1    = new Cell[8]; 
+Cell[] letterStack1   = new Cell[8]; 
 Cell[] letterStack2   = new Cell[8]; 
 
 // are we dragging a letter from letterStack? 
@@ -58,11 +59,11 @@ int stateInputRight = DrawLetters;
 // player scores 
 int pointsLeft, pointsRight;
 
-// the score of the letters (how much is one letter worth) German
+// the score of the letters (how much is one letter worth) German/ ENGLISH
 HashMap<String, Integer>  pointsOfLetter = new HashMap<String, Integer> ();  
 
 // for showing the table of results 
-String scoreTable=""; 
+String scoreTable=""; // its content
 ScoreTable[] scoreTables = new ScoreTable[2]; 
 
 // ----------------------------------------------------------------
@@ -95,43 +96,53 @@ void setup () {
   button1 = new Button ( "Draw Letters", 840, 360, BLACK);
 
   // ScoreTable init
-  scoreTables[0]=new ScoreTable(720, 400, 100, 280, 0); 
-  scoreTables[1]=new ScoreTable(940, 400, 100, 280, 1);
+  initScoreTable(); 
 
-  background (90);
+  background (0);
 }
 
 void draw () {
   background (0);
 
-  // buttons
-  button0.display(); 
-  button1.display(); 
+  if (state==startScreen) {
+    showWelcomeScreen();
+  } else if (state==normalGame||state == gameOver) {
+    // buttons
+    button0.display(); 
+    button1.display(); 
 
-  // main game board 
-  for (int x=0; x<max1; x++) {
-    for (int y=0; y<max1; y++) {
-      mainGrid[x][y].display();
+    // main game board 
+    for (int x=0; x<max1; x++) {
+      for (int y=0; y<max1; y++) {
+        mainGrid[x][y].display();
+      }
     }
+
+    // when we drag one letter 
+    draggingALetter(); 
+
+    // show both letter stacks below
+    showLetterStacks();
+
+    // show Minor Stuff on the screen 
+    showMinorStuff();
+
+    // Game over? 
+    checkGameOver();
   }
 
-  // when we drag one letter 
-  draggingALetter(); 
-
-  // show both letter stacks below
-  showLetterStacks();
-
-  // show Minor Stuff on the screen 
-  showMinorStuff();
-
-  // Game over? 
-  checkGameOver();
+  // no else here -----------
 
   // display message
   if (state == gameOver) {
     //
     fill(RED);
-    text ( "Game Over", width/2, height-133 );
+    text ( "Game Over", width/2, height-29 );
+    noFill();
+    stroke(RED); 
+    strokeWeight(3); 
+    rect(3, 3, width-6, height-6);
+    strokeWeight(3);
   }
   //
 }//func 

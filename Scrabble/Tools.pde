@@ -1,6 +1,51 @@
 
 // minor tools 
 
+void showWelcomeScreen() {
+
+  String text1="Welcome to Scrabble";
+  String text2="Welcome";
+
+  Cell[] letterWelcome = new Cell[text1.length()]; 
+  Cell[] letterWelcome2 = new Cell[text2.length()];
+
+  // define 
+  for (int i=0; i<text1.length(); i++) {
+    letterWelcome[i] = 
+      new Cell (40*i + 80, 280, color(#F0E2B3), true);
+    letterWelcome[i].cellLetter = text1.charAt(i);
+  }
+
+  // define 
+  for (int i=0; i<text2.length(); i++) {
+    letterWelcome2[i] = 
+      new Cell (40*1 + 80, i*40+280-(1*40), color(#F0E2B3), true);
+    letterWelcome2[i].cellLetter = text2.charAt(i);
+  }
+
+  // display I 
+  for (int i=0; i<text1.length(); i++) {
+    letterWelcome[i].display();
+  }
+
+  // display II 
+  for (int i=0; i<text2.length(); i++) {
+    letterWelcome2[i].display();
+  }
+
+  // further text
+  fill(255);
+  textAlign(LEFT);
+  textSize(22); 
+  text("Two players make their moves alternating.\n"
+    +"At the beginning click 'Draw Letters' to get 8 letters.\n"
+    +"To make a move drag the letters from your 8 letter stack\n"
+    +"to the big main field left. When you placed your word\n"
+    +"click 'Finish move' and 'Move OK'.\n\n"
+    +"You receive new letters so you have 8 letters again.\n"
+    +"Now it's your friend's move.\n\n", 280+40, 422);
+} //func 
+
 void checkGameOver() {
 
   int conditionsCounter = 0; 
@@ -22,7 +67,7 @@ void checkGameOver() {
 }//func 
 
 boolean isLetterStackEmpty (Cell[] letterStack) {
-  // 
+  // this is for game over checks 
   for (int i=0; i<8; i++) {
     if (letterStack[i].exist) {
       return false;
@@ -51,11 +96,27 @@ void showLetterStacks() {
   showLinesAroundLetterStack( letterStack2, 1 ); // 1 means: letterStack Right
 }
 
+void initScoreTable() { 
+  // ScoreTable init
+  int widthScoreTable = 100;
+  int heightScoreTable = 280;
+
+  float xpos = letterStack1[0].xOriginal-3; 
+  scoreTables[0]=new ScoreTable( xpos, 400, widthScoreTable, heightScoreTable, 0);
+
+  xpos = letterStack1[7].xOriginal + letterStack1[7].diameter+3 - widthScoreTable; 
+  scoreTables[1]=new ScoreTable( xpos, 400, widthScoreTable, heightScoreTable, 1);
+}// func 
+
 void showMinorStuff() {
 
   // display quantity remaining letters in the Heap  (upper right corner)
   fill(255);
-  text(allLetters.length() - allLettersPosition, width-66, 66);
+  textSize(16);
+  text("Letters left\non the Heap\n"
+    +str(allLetters.length() - allLettersPosition), 
+    width-66, 66);
+  textSize(26);
 
   // display points players 
   fill(255);
@@ -66,7 +127,9 @@ void showMinorStuff() {
   for (int i = 0; i<scoreTables.length; i++) {  
     scoreTables[i].display();
   }//for
-}
+}// func 
+
+// --------------------------------------------------------------
 
 void showLinesAroundLetterStack( Cell[] c, int leftLine   ) {
 
@@ -75,7 +138,7 @@ void showLinesAroundLetterStack( Cell[] c, int leftLine   ) {
   if ( whichPlayersMove == leftLine ) 
     stroke (GREEN); 
   else 
-  stroke(BLACK); 
+  stroke(144); // I modified this CR 
 
   strokeWeight(3); 
   line(
