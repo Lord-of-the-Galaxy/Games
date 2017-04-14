@@ -6,6 +6,8 @@ final static float XOFF = 15, YOFF = 15, P_XOFF = 680, P_YOFF = 30, P_W = 400, P
 //change these colors at your discretion
 public static final color PEACH = #F7CE91;
 public static final color GREEN = #00FF00;
+public static final color DARK_GREEN = #035A02;
+public static final color LIGHT_GREEN = #A1FFA0;
 public static final color DEFAULT = #23FF86;
 public static final color DARK_BLUE = #0000FF;
 public static final color LIGHT_BLUE = #46E8DE;

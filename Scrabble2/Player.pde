@@ -14,8 +14,8 @@ class Player {
   void draw() {
     if (activePlayer != index) {
       pushStyle();
-      fill(LIGHT_BLUE);//whatever came to my mind :) Please change if you gat a better idea
-      stroke(DARK_BLUE);
+      fill(LIGHT_GREEN);//whatever came to my mind :) Please change if you gat a better idea
+      stroke(DARK_GREEN);
       strokeWeight(2);
       float y = index*P_H + P_YOFF;
       if(activePlayer < index)y += P_H_A-P_H;
@@ -23,8 +23,8 @@ class Player {
       popStyle();
     }else{
       pushStyle();
-      fill(LIGHT_BLUE);//whatever came to my mind :) Please change if you gat a better idea
-      stroke(DARK_BLUE);
+      fill(LIGHT_GREEN);//whatever came to my mind :) Please change if you gat a better idea
+      stroke(DARK_GREEN);
       strokeWeight(2);
       float y = index*P_H + P_YOFF;
       rect(P_XOFF, y, P_W, P_H_A, 6);
