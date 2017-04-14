@@ -62,6 +62,8 @@ void defineValuePoints(char c, int s) {
 
 void generateXLetters(char c, int no){
   for(int i = 0; i < no; i++){
-    
+    Letter l = new Letter(c);
+    letters.add(l);
+    pile.add(l);
   }
 }

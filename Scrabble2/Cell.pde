@@ -50,6 +50,8 @@ class Cell {
 
   int type = gridDefault;
 
+  Letter cur = null;
+
   Cell(int i_, int j_) {    
     i = i_;
     j = j_;
@@ -79,12 +81,13 @@ class Cell {
     textAlign(LEFT, TOP);
     textSize(12);
 
-    if (mouseX>i*S + XOFF&&mouseX<i*S + XOFF+S &&
+    //had to remove
+    /**if (mouseX>i*S + XOFF&&mouseX<i*S + XOFF+S &&
       mouseY>j*S + XOFF&&mouseY<j*S + XOFF+S) {
       fill(255);
       text(listType[type], 
         16, height-17);
-    }//if
+    }*///if
   }//func
 
   void star(float x, float y) {
@@ -120,6 +123,27 @@ class Cell {
       vertex(sx, sy);
     }
     endShape(CLOSE);
+  }
+
+  void put(Letter l) {
+    if (empty) {
+      cur = l;
+      empty = false;
+    }else System.err.println("You're trying to put a letter in an occupied place. This shouldn't be happening. Error in code!");
+  }
+  
+  void save(){
+    if(!empty){
+      used = true;
+      cur.active(false).p = null;
+    }else System.err.println("There is no letter in this cell. This shouldn't be happening. Error in code!");
+  }
+  
+  void remove(){
+    if(!empty && !used){
+      cur = null;
+      empty = true;
+    }else System.err.println("There is no letter in this cell. This shouldn't be happening. Error in code!");
   }
 }//class
 //
